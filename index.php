@@ -3,10 +3,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home | ERP Model</title>
@@ -20,7 +16,7 @@
     </head>
 
 <body>
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center" style="padding: 0px 0px 0px 0px">
 
         <?php include("./includes/header.php") ?>
 
@@ -33,7 +29,7 @@
                         <li data-target="#carousel-update" data-slide-to="2"></li>
                     </ul>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div class="carousel-item active" style="height: 500px;">
                             <img src="./assets/vendor/slideshow-img-1.jpg" alt="School Preview">
                         </div>
                     </div>
