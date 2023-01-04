@@ -1,4 +1,24 @@
-<?php include("../config.php"); ?>
+<?php include("../config.php"); 
+if(!empty($_GET['status'])){
+    switch($_GET['status']){
+        case 'succ':
+            $statusType = 'alert-success';
+            $statusMsg = 'Members data has been imported successfully.';
+            break;
+        case 'err':
+            $statusType = 'alert-danger';
+            $statusMsg = 'Some problem occurred, please try again.';
+            break;
+        case 'invalid_file':
+            $statusType = 'alert-danger';
+            $statusMsg = 'Please upload a valid CSV file.';
+            break;
+        default:
+            $statusType = '';
+            $statusMsg = '';
+    }
+}?>
+
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -8,15 +28,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student | Admin</title>
     <link rel="stylesheet" href="../assets/css/base-styles.css">
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
 
-<body>
+       <style type="text/css">
+
+    .btn {
+    border-color: white;
+    color: #3AB4F2;
+    background-color:white;
+    }
+    .btn-outline-primary {
+    color: #3AB4F2;
+    border-color: white;
+}
+    </style>
+    </head>
+
+
+
+<!-- Display status message -->
+<?php if(!empty($statusMsg)){ ?>
+<div class="col-xs-12">
+    <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+</div>
+<?php } ?>
+
+    
+    
+    <body>
+    <div class="row">
+    <!-- Import link -->
+    <div class="col-md-12 head">
+        <div class="float-right">
+            <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i> Import</a>
+        </div>
+    </div>
+    <!-- CSV file upload form -->
+    <div class="col-md-12" id="importFrm" style="display: none;">
+        <form action="./manage-student.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+        </form>
+    </div>
+
+
+
+<!--  ----------------------------------------------------------------------------------------------------------->
+
+
     <div class="container-fluid p-4">
         <?php
         if ($_SESSION["user_category"] == "admin") {
@@ -24,9 +90,10 @@
             
             if ($query == "add") {
                 echo "
-                    <div class='card account custom-shadow mt-5 p-2'>
-                    <h3 class='text-center'>Add Student</h3>
-                    <hr>
+                  <div class='card account custom-shadow mt-5 p-2' style='background-color:#3AB4F2;color:white;border-radius: 1rem 0 0 1rem';>
+                        <h3 class='text-center'>Add Student</h3>
+                        <hr>
+                    
                 
                     <form class='card-body' method='POST' action='./manage-student.php'>
                         <div class='form-group'>
@@ -122,12 +189,13 @@
                 $students_details = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
                 echo "
+                <div class = 'border border-5 border-info' style='padding:30px 30px 30px 30px;'>
                     <h2>Student List</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero adipisci mollitia illum atque sequi distinctio optio minus natus nulla vel?</p>    
                     <input class='form-control w-25 mt-4 mb-4' id='searchInput' type='text' placeholder='Filter by any attribute'> 
 
-                    <table class='table table-hover'>
-                        <thead>
+                    <table class='table table-striped table-bordered table-hover'>
+                        <thead class='thead-dark'>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -141,6 +209,7 @@
                             </tr>
                         </thead>
                         <tbody id='dataTable'>
+                 </div>
                 ";
 
                 foreach ($students_details as $attribute => $student_details) {
@@ -328,8 +397,8 @@
 
                             <br>
                             <div class='text-center'>
-                                <button type='submit' name='update_student' class='btn btn-outline-primary w-50'>Update Profile</button>
-                            </div>
+                                    <button type='submit' name='update_student' class='btn btn-outline-light w-50'>Update Profile</button>
+                                </div>
 
                         </form>
                     </div>
@@ -357,6 +426,15 @@
             });
         });
     });
+
+    function formToggle(ID){
+    var element = document.getElementById(ID);
+    if(element.style.display === "none"){
+        element.style.display = "block";
+    }else{
+        element.style.display = "none";
+    }
+}
 </script>
 
 </html>
