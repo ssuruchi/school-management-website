@@ -14,19 +14,71 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<style type="text/css">
+   
+    body{
+        padding: 120px;
+       /* background-color:#82AAE3; */
+       padding-bottom:100px;
+       background-color:#00E7FF;
+
+    }
+    .btn{
+        border-color:cyan;
+        color:cyan;
+        
+    }
+   .p-4 {
+    border-radius: .5rem !important;
+    box-sizing: border-box;  
+   }
+   .row {
+    --mdb-gutter-x: 0;
+    --mdb-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--mdb-gutter-y)*-1);
+    margin-right: calc(var(--mdb-gutter-x)*-0.5);
+    margin-left: calc(var(--mdb-gutter-x)*-0.5);
+    box-sizing: border-box;
+        
+}
+.img-fluid, .img-thumbnail {
+    max-width: 100%;
+    height: auto;
+    --mdb-gutter-x: 0;
+}
+   @media (min-width: 768px){
+ .d-md-block {
+    display: block!important;
+    }
+    .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+}
+
+   }
+    </style>
+    </head>
 
 <body>
-    <div class="container-fluid p-4">
+     <div class="container-fluid p-4" style="background-color: white; border-radius: .5rem .5rem 0 0;">
+    <div class="row g-0">
+        <div class="col-md-6 col-lg-6 d-none d-md-block">
+                <img src="./panda_add.jpg" alt="School Preview"
+                    alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;width: 500px;height: 724px;" />
+        </div>
         <?php
         if ($_SESSION["user_category"] == "admin") {
             $query = $_GET["query"];
             
             if ($query == "add") {
                 echo "
-                    <div class='card account custom-shadow mt-4 p-3'>
-                        <h3 class='text-center'>Add Driver</h3>
-                        <hr>
+                    <div class='card account custom-shadow mt-4 p-3 col-md-6 col-lg-6'>
+                            <div class='topic' style='background-color:#00E7FF;color:white;padding-top:12px';>   
+                             <h3 class='text-center' >Add Driver</h3>
+                            </div> 
+                            <hr style='background-color:#00E7FF';>
                         <form class='card-body' method='POST' action='./manage-driver.php'>
                             <div class='form-group'>
                                 <label>Full Name:</label>
@@ -59,7 +111,7 @@
 
                         <div class='col'>
                             <div class='form-group'>
-                                <label>D.O.J:</label>
+                                <label>D.O.B:</label>
                                 <input type='date' class='form-control' name='doj'>
                             </div>
                         </div>
@@ -86,24 +138,26 @@
                 $drivers_details = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
                 echo "
+                <div class = 'border border-5 border-info' style='padding:30px 30px 30px 30px;'>
                     <h2>Driver List</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero adipisci mollitia illum atque sequi distinctio optio minus natus nulla vel?</p>    
                     <input class='form-control w-25 mt-4 mb-4' id='searchInput' type='text' placeholder='Filter by any attribute'> 
 
-                    <table class='table table-hover'>
-                        <thead>
+                    <table class='table table-striped table-bordered table-hover'>
+                        <thead class='thead-dark'>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Gender</th>
-                                <th>D.O.J</th>
+                                <th>D.O.B</th>
                                 <th>Address</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id='dataTable'>
+                 </div>
                 ";
 
                 foreach ($drivers_details as $attribute => $driver_details) {
@@ -249,7 +303,7 @@
 
                                 <div class='col'>
                                     <div class='form-group'>
-                                        <label>D.O.J:</label>
+                                        <label>D.O.B:</label>
                                         <input type='date' class='form-control' name='doj' value={$driver_details['doj']}>
                                     </div>
                                 </div>
@@ -282,6 +336,7 @@
         }
         ?>
     </div>
+         </div>
 </body>
 <script>
     $(document).ready(function() {

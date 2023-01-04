@@ -14,7 +14,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<style type="text/css">
+
+.btn {
+border-color: white;
+color: #3AB4F2;
+background-color:white;
+}
+.btn-outline-primary {
+color: #3AB4F2;
+border-color: white;
+}
+</style>
+    </head>
 
 <body>
     <div class="container-fluid p-4">
@@ -24,7 +36,7 @@
 
             if ($query == "add") {
                 echo "
-                    <div class='card account custom-shadow mt-4 p-3'>
+                   <div class='card account custom-shadow mt-4 p-3' style='background-color:#3AB4F2;color:white;border-radius: 1rem 0 0 1rem';>
                         <h3 class='text-center'>Add Schedule</h3>
                         <hr>
                         <form class='card-body' method='POST' action='manage-schedule.php'>
@@ -124,12 +136,13 @@
                 $schedules_details = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
                 echo "
+                <div class = 'border border-5 border-info' style='padding:30px 30px 30px 30px;'>
                     <h2>Schedule List</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero adipisci mollitia illum atque sequi distinctio optio minus natus nulla vel?</p>    
                     <input class='form-control w-25 mt-4 mb-4' id='searchInput' type='text' placeholder='Filter by any attribute'> 
 
-                    <table class='table table-hover'>
-                        <thead>
+                    <table class='table table-striped table-bordered table-hover'>
+                        <thead class='thead-dark'>
                             <tr>
                                 <th>Vehicle No.</th>
                                 <th>Day</th>
@@ -142,6 +155,7 @@
                             </tr>
                         </thead>
                         <tbody id='dataTable'>
+                  </div>
                 ";
 
                 foreach ($schedules_details as $attribute => $schedule_details) {
@@ -338,7 +352,7 @@
                 echo "
                             <br>
                             <div class='text-center'>
-                                <button type='submit' name='update_schedule' class='btn btn-outline-primary w-50'>Update Schedule</button>
+                                <button type='submit' name='update_schedule' class='btn btn-outline-white w-50'>Update Schedule</button>
                             </div>
                         </form>
                     </div>

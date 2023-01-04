@@ -14,7 +14,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+ <style type="text/css">
+
+.btn {
+border-color: white;
+color: black;
+background-color:white;
+}
+.btn-outline-dark {
+color: gray;
+border-color: white;
+}
+</style>
+    </head>
 
 <body>
     <div class="container-fluid p-4">
@@ -25,11 +37,10 @@
             if ($query == "add") {
                 echo "
                     <div class='card account custom-shadow mt-5 p-3'>
-                        <h3 class='text-center'>Add Timetable</h3>
+                        <h3 class='text-center' style='background-color:gray;color:white;border-radius: 1rem 0 0 1rem;'>Add Timetable🕛</h3>
                         <hr>
-                        <form class='card-body' method='POST' action='manage-timetable.php' enctype='multipart/form-data'>                            
+                        <form class='card-body' style='background-color:gray;color:white;' method='POST' action='manage-timetable.php' enctype='multipart/form-data'>                            
                             <div class='form-group'>
-                                    <label>Class:</label>
                                     <select class='form-control' name='class_id' required>
                                   
                 ";
@@ -68,12 +79,13 @@
                 $timetables_details = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
                 echo "
+                <div class = 'border border-5 border-info' style='padding:30px 30px 30px 30px;'>
                     <h2>Timetable List</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero adipisci mollitia illum atque sequi distinctio optio minus natus nulla vel?</p>    
                     <input class='form-control w-25 mt-4 mb-4' id='searchInput' type='text' placeholder='Filter by any attribute'> 
 
-                    <table class='table table-hover'>
-                        <thead>
+                    <table class='table table-striped table-bordered table-hover'>
+                        <thead class='thead-dark'>
                             <tr>
                                 <th>Standard</th>
                                 <th>File</th>
@@ -82,6 +94,7 @@
                             </tr>
                         </thead>
                         <tbody id='dataTable'>
+                </div>
                 ";
 
                 foreach ($timetables_details as $attribute => $timetable_details) {
