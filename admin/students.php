@@ -63,26 +63,6 @@ if(!empty($_GET['status'])){
     
     
     <body>
-    <div class="row">
-    <!-- Import link ----> 
-    <div class="col-md-12 head">
-        <div class="float-right">
-            <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i> Import</a>
-        </div>
-    </div>
-    <!-- CSV file upload form -->
-    <div class="col-md-12" id="importFrm" style="display: none;">
-        <form action="./manage-student.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" />
-            <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
-        </form>
-    </div>
-
-
-
-<!--  ----------------------------------------------------------------------------------------------------------->
-
-
     <div class="container-fluid p-4">
         <?php
         if ($_SESSION["user_category"] == "admin") {
@@ -171,8 +151,25 @@ if(!empty($_GET['status'])){
                             </div>
 
                             <br>
+                            
                             <div class='text-center'>
-                                <button type='submit' name='add_student' class='btn btn-outline-primary w-50'>ADD</button>
+                                <div class='row'>
+                                <!-- Import link ----> 
+                                <div class='col-md-12 head'>
+                                    <button type='submit' name='add_student' class='btn btn-outline-primary w-50'>ADD</button>
+                                    <a href='javascript:void(0);' class='btn btn-success' onclick='formToggle('importFrm');'><i class='plus'></i> Import</a>
+                                </div>
+                                <!-- CSV file upload form -->
+                                <div class='col-md-12' id='importFrm' style='display: none;'>
+                                    <form action='./manage-student.php' method='post' enctype='multipart/form-data'>
+                                        <input type='file' name='file' />
+                                        <input type='submit' class='btn btn-primary' name='importSubmit' value='IMPORT'>
+                                    </form>
+                                </div>
+                            
+                            
+                            
+                            <!--  ----------------------------------------------------------------------------------------------------------->
                             </div>
 
                         </form>
